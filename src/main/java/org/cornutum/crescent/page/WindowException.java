@@ -12,7 +12,7 @@ public class WindowException extends PageException {
     /**
      * Creates a new WindowException object.
      */
-    public WindowException( Page page, String reason, Throwable cause) {
+    public WindowException( Page<?> page, String reason, Throwable cause) {
         super( page, cause);
         setReason( reason);
     }
@@ -20,14 +20,14 @@ public class WindowException extends PageException {
     /**
      * Creates a new WindowException object.
      */
-    public WindowException( Page page, Throwable cause) {
+    public WindowException( Page<?> page, Throwable cause) {
         this( page, null, cause);
     }
   
     /**
      * Creates a new WindowException object.
      */
-    public WindowException( Page page, String reason) {
+    public WindowException( Page<?> page, String reason) {
         this( page, reason, null);
     }
 

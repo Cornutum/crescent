@@ -14,7 +14,7 @@ public class ElementMissingException extends PageException {
     /**
      * Creates a new ElementMissingException object.
      */
-    public ElementMissingException( Page page, By locator) {
+    public ElementMissingException( Page<?> page, By locator) {
         super( page);
         setLocator( locator);
     }

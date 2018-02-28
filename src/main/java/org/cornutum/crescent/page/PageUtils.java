@@ -63,7 +63,7 @@ public final class PageUtils {
     /**
      * Positions the pointer over the center of the given element.
      */
-    public static void moveTo( Page page, WebElement element) {
+    public static void moveTo( Page<?> page, WebElement element) {
         new Actions( page.getDriver()).moveToElement( element).perform();
     }
 
@@ -224,7 +224,7 @@ public final class PageUtils {
      * Returns the result of the given supplier when invoked in the context of the
      * given frame. On return, restores the context to the main page content.
      */
-    public static <T> T withFrame( Page page, WebElement frame, Supplier<T> resultSupplier) {
+    public static <T> T withFrame( Page<?> page, WebElement frame, Supplier<T> resultSupplier) {
         try {
             page.getDriver().switchTo().frame( frame);
             return resultSupplier.get();
@@ -238,7 +238,7 @@ public final class PageUtils {
      * Converts the content of the given element to an integer value, returning null for a blank string.
      * Throws an {@link InvalidStateException} if the element does not represent an integer value.
      */
-    public static Integer getInteger( Page page, WebElement element, String valueDescription) {
+    public static Integer getInteger( Page<?> page, WebElement element, String valueDescription) {
         return getInteger( page, element.getText(), valueDescription);
     }
 
@@ -246,7 +246,7 @@ public final class PageUtils {
      * Converts the given text to an integer value, returning null for a blank string.
      * Throws an {@link InvalidStateException} if the text does not represent an integer value.
      */
-    public static Integer getInteger( Page page, String text, String valueDescription) {
+    public static Integer getInteger( Page<?> page, String text, String valueDescription) {
         try {
             String value = StringUtils.trimToNull( text);
             return value == null? null : Integer.valueOf( value);
@@ -260,7 +260,7 @@ public final class PageUtils {
      * Converts the content of the given element to an double value, returning null for a blank string.
      * Throws an {@link InvalidStateException} if the element does not represent an double value.
      */
-    public static Double getDouble( Page page, WebElement element, String valueDescription) {
+    public static Double getDouble( Page<?> page, WebElement element, String valueDescription) {
         return getDouble( page, element.getText(), valueDescription);
     }
 
@@ -268,7 +268,7 @@ public final class PageUtils {
      * Converts the given text to a double value, returning null for a blank string.
      * Throws an {@link InvalidStateException} if the text does not represent an double value.
      */
-    public static Double getDouble( Page page, String text, String valueDescription) {
+    public static Double getDouble( Page<?> page, String text, String valueDescription) {
         try {
             String value = StringUtils.trimToNull( text);
             return value == null? null : Double.valueOf( value);

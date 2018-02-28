@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 /**
  * Base class for a UI component common to multiple {@link Page} types.
  */
-public abstract class Component<P extends Page> {
+public abstract class Component<P extends Page<?>> {
 
     private final P page;
     private final SearchContext container;

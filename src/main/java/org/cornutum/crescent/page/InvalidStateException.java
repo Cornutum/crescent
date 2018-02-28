@@ -12,7 +12,7 @@ public class InvalidStateException extends PageException {
     /**
      * Creates a new InvalidStateException object.
      */
-    public InvalidStateException( Page page, String reason, Throwable cause) {
+    public InvalidStateException( Page<?> page, String reason, Throwable cause) {
         super( page, cause);
         setReason( reason);
     }
@@ -20,14 +20,14 @@ public class InvalidStateException extends PageException {
     /**
      * Creates a new InvalidStateException object.
      */
-    public InvalidStateException( Page page, Throwable cause) {
+    public InvalidStateException( Page<?> page, Throwable cause) {
         this( page, null, cause);
     }
   
     /**
      * Creates a new InvalidStateException object.
      */
-    public InvalidStateException( Page page, String reason) {
+    public InvalidStateException( Page<?> page, String reason) {
         this( page, reason, null);
     }
 

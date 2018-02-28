@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 /**
  * A {@link PageAction} that produces content in a new window.
  */
-public abstract class NewWindowAction<P extends Page,T> extends PageAction<P,T> {
+public abstract class NewWindowAction<P extends Page<?>,T> extends PageAction<P,T> {
 
     /**
      * Creates a new NewWindowAction object.

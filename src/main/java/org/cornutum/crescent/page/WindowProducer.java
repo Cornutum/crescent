@@ -14,12 +14,12 @@ import java.util.Set;
  */
 public abstract class WindowProducer {
 
-    private final Page page;
+    private final Page<?> page;
     
     /**
      * Opens content in a new window and returns the new window handle.
      */
-    protected WindowProducer( Page page) {
+    protected WindowProducer( Page<?> page) {
         this.page = page;
     }
     
@@ -55,7 +55,7 @@ public abstract class WindowProducer {
     /**
      * Returns the page for this producer.
      */
-    public Page getPage() {
+    public Page<?> getPage() {
         return page;
     }
 

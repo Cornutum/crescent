@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 /**
  * Represents a page element that performs an action.
  */
-public abstract class PageAction<P extends Page,T> {
+public abstract class PageAction<P extends Page<?>,T> {
 
     private final P page;
     private final WebElement element;

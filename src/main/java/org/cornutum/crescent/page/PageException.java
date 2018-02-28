@@ -5,14 +5,14 @@ package org.cornutum.crescent.page;
  */
 public abstract class PageException extends RuntimeException {
 
-    private Page page;
+    private Page<?> page;
 
     private static final long serialVersionUID = 988785294044951096L;
 
     /**
      * Creates a new PageException object.
      */
-    public PageException( Page page, Throwable cause) {
+    public PageException( Page<?> page, Throwable cause) {
         super( cause);
         setPage( page);
     }
@@ -20,21 +20,21 @@ public abstract class PageException extends RuntimeException {
     /**
      * Creates a new PageException object.
      */
-    public PageException( Page page) {
+    public PageException( Page<?> page) {
         this( page, null);
     }
 
     /**
      * Changes the page where this failure occurred.
      */
-    public void setPage( Page page) {
+    public void setPage( Page<?> page) {
         this.page = page;
     }
 
     /**
      * Returns the page where this failure occurred.
      */
-    public Page getPage() {
+    public Page<?> getPage() {
         return page;
     }
 }

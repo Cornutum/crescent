@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 /**
  * A {@link PageAction} that produces results by directly activating an element.
  */
-public abstract class ElementAction<P extends Page,T> extends PageAction<P,T> {
+public abstract class ElementAction<P extends Page<?>,T> extends PageAction<P,T> {
 
     /**
      * Creates a new ElementAction object.

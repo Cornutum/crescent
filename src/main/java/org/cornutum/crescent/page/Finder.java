@@ -23,7 +23,7 @@ import static java.util.stream.Collectors.toList;
  */
 public class Finder {
 
-    private Page page;
+    private Page<?> page;
     private SearchContext root;
     private long timeout;
     private long interval;
@@ -33,21 +33,21 @@ public class Finder {
     /**
      * Creates a new Finder object.
      */
-    public Finder( Page page) {
+    public Finder( Page<?> page) {
         this( page, page.getMaxAppWait());
     }
 
     /**
      * Creates a new Finder object.
      */
-    public Finder( Page page, long timeout) {
+    public Finder( Page<?> page, long timeout) {
         this( page, timeout, getDefaultInterval( timeout));
     }
 
     /**
      * Creates a new Finder object.
      */
-    public Finder( Page page, long timeout, long interval) {
+    public Finder( Page<?> page, long timeout, long interval) {
         setPage( page);
         setRoot( page.getDriver());
         setTimeout( timeout);
@@ -138,14 +138,14 @@ public class Finder {
     /**
      * Changes the page for this finder.
      */
-    private void setPage( Page page) {
+    private void setPage( Page<?> page) {
         this.page = page;
     }
 
     /**
      * Returns the page for this finder.
      */
-    private Page getPage() {
+    private Page<?> getPage() {
         return page;
     }
 

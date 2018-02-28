@@ -13,7 +13,7 @@ public class RequestException extends PageException {
     /**
      * Creates a new RequestException object.
      */
-    public RequestException( Page page, String request, String reason, Throwable cause) {
+    public RequestException( Page<?> page, String request, String reason, Throwable cause) {
         super( page, cause);
         setRequest( request);
         setReason( reason);
@@ -22,14 +22,14 @@ public class RequestException extends PageException {
     /**
      * Creates a new RequestException object.
      */
-    public RequestException( Page page, String request, Throwable cause) {
+    public RequestException( Page<?> page, String request, Throwable cause) {
         this( page, request, null, cause);
     }
   
     /**
      * Creates a new RequestException object.
      */
-    public RequestException( Page page, String request, String reason) {
+    public RequestException( Page<?> page, String request, String reason) {
         this( page, request, reason, null);
     }
 

@@ -19,7 +19,7 @@ public class InvalidFormException extends PageException {
     /**
      * Creates a new InvalidFormException with the given field validation failures.
      */
-    public InvalidFormException( Page page, FieldFailure... failures) {
+    public InvalidFormException( Page<?> page, FieldFailure... failures) {
         super( page);
         Arrays.stream( failures).forEach( f -> addFailure( f));
     }
@@ -27,7 +27,7 @@ public class InvalidFormException extends PageException {
     /**
      * Returns a new InvalidFormException if the given list of failures is non-null and non-empty.
      */
-    public static Optional<InvalidFormException> of( Page page, List<FieldFailure> failures) {
+    public static Optional<InvalidFormException> of( Page<?> page, List<FieldFailure> failures) {
         return
             Optional.ofNullable
             ( failures == null || failures.isEmpty()

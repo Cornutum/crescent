@@ -16,88 +16,88 @@ import java.util.function.Predicate;
 /**
  * Base class for page model implementations.
  */
-public abstract class Page {
+public abstract class Page<S extends Site> {
   
     private long maxAppWait;
-    private Site site;
+    private S site;
     private URI uri;
     private WindowHandle window;
-    private Page parent;
+    private Page<S> parent;
 
     /**
      * Creates a new Page object.
      */
-    public Page( Site site) {
+    public Page( S site) {
         this( site, null, null);
     }
   
     /**
      * Creates a new Page object.
      */
-    public Page( Site site, String uri) {
+    public Page( S site, String uri) {
         this( site, null, Site.toURI( uri));
     }
   
     /**
      * Creates a new Page object.
      */
-    public Page( Site site, URI uri) {
+    public Page( S site, URI uri) {
         this( site, null, uri);
     }
   
     /**
      * Creates a new Page object.
      */
-    public Page( Site site, WindowHandle window) {
+    public Page( S site, WindowHandle window) {
         this( site, window, null);
     }
 
     /**
      * Creates a new Page object.
      */
-    public Page( Page parent) {
+    public Page( Page<S> parent) {
         this( parent, null, null);
     }
   
     /**
      * Creates a new Page object.
      */
-    public Page( Page parent, String uri) {
+    public Page( Page<S> parent, String uri) {
         this( parent, null, Site.toURI( uri));
     }
   
     /**
      * Creates a new Page object.
      */
-    public Page( Page parent, URI uri) {
+    public Page( Page<S> parent, URI uri) {
         this( parent, null, uri);
     }
   
     /**
      * Creates a new Page object.
      */
-    public Page( Page parent, WindowHandle window) {
+    public Page( Page<S> parent, WindowHandle window) {
         this( parent, window, null);
     }
   
     /**
      * Creates a new Page object.
      */
-    protected Page( Page parent, WindowHandle window, URI uri) {
+    protected Page( Page<S> parent, WindowHandle window, URI uri) {
         this( parent.getSite(), parent, window, uri);
     }
   
     /**
      * Creates a new Page object.
      */
-    protected Page( Site site, WindowHandle window, URI uri) {
+    protected Page( S site, WindowHandle window, URI uri) {
         this( site, null, window, uri);
     }
   
     /**
      * Creates a new Page object.
      */
-    protected Page( Site site, Page parent, WindowHandle window, URI uri) {
+    protected Page( S site, Page<S> parent, WindowHandle window, URI uri) {
         setSite( site);
         setParent( parent);
         setMaxAppWait( site.getMaxAppWait());
@@ -110,14 +110,14 @@ public abstract class Page {
     /**
      * Changes the Site for this page.
      */
-    public void setSite( Site site) {
+    public void setSite( S site) {
         this.site = site;
     }
 
     /**
      * Returns the Site for this page.
      */
-    public Site getSite() {
+    public S getSite() {
         return site;
     }
 
@@ -159,14 +159,14 @@ public abstract class Page {
     /**
      * Changes the parent of this page
      */
-    public void setParent( Page parent) {
+    public void setParent( Page<S> parent) {
         this.parent = parent;
     }
 
     /**
      * Returns the parent of this page
      */
-    public Page getParent() {
+    public Page<S> getParent() {
         return parent;
     }
 
@@ -247,8 +247,8 @@ public abstract class Page {
     /**
      * Moves back to the previous page in the browser history.
      */
-    public Page back() {
-        Page parent = getParent();
+    public Page<S> back() {
+        Page<S> parent = getParent();
 
         if( parent == null || !parent.getWindow().equals( getWindow())) {
             throw new RequestException( this, "back", "No previous page known in the browser history for this window");
@@ -268,7 +268,7 @@ public abstract class Page {
     /**
      * Moves back to the previous page in the browser history.
      */
-    public <P extends Page> P back( Class<P> parentType) {
+    public <P extends Page<S>> P back( Class<P> parentType) {
         try {
             return parentType.cast( back());
         }
@@ -280,7 +280,7 @@ public abstract class Page {
     /**
      * Closes the current window, switches the driver context to the Window of this page's parent, and returns this page's parent
      */
-    public Page close() {
+    public Page<S> close() {
         WebDriver driver = getDriver();
 
         if( driver.getWindowHandles().size() == 1) {
@@ -396,14 +396,14 @@ public abstract class Page {
     /**
      * Returns the PageAction represented by the WebElement located by the given selector.
      */
-    protected <T,P extends Page,A extends PageAction<P,T>> Optional<A> getAction( By selector, Class<A> actionType, Class<P> pageType) {
+    public <T,P extends Page<?>,A extends PageAction<P,T>> Optional<A> getAction( By selector, Class<A> actionType, Class<P> pageType) {
         return getAction( finder(), selector, actionType, pageType);
     }
 
     /**
      * Returns the PageAction represented by the WebElement located by the given selector.
      */
-    protected <T,P extends Page,A extends PageAction<P,T>> Optional<A> getAction( Finder finder, By selector, Class<A> actionType, Class<P> pageType) {
+    public <T,P extends Page<?>,A extends PageAction<P,T>> Optional<A> getAction( Finder finder, By selector, Class<A> actionType, Class<P> pageType) {
         return
             finder.findOptionalElement( selector)
             .map( e -> {
@@ -422,15 +422,17 @@ public abstract class Page {
     /**
      * Returns the BasicElementAction represented by the WebElement located by the given selector.
      */
-    protected Optional<BasicElementAction> getBasicElementAction( By selector) {
+    public Optional<BasicElementAction> getBasicElementAction( By selector) {
         return getBasicElementAction( finder(), selector);
     }
 
     /**
      * Returns the BasicElementAction represented by the WebElement located by the given selector.
      */
-    protected Optional<BasicElementAction> getBasicElementAction( Finder finder, By selector) {
-        return getAction( finder, selector, BasicElementAction.class, Page.class);
+    public Optional<BasicElementAction> getBasicElementAction( Finder finder, By selector) {
+        return
+            finder.findOptionalElement( selector)
+            .map( e -> new BasicElementAction( this, e));
     }
 
     public String toString() {

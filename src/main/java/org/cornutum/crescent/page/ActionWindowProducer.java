@@ -12,7 +12,7 @@ public class ActionWindowProducer extends WindowProducer {
     /**
      * Creates a new ActionWindowProducer object.
      */
-    public ActionWindowProducer( Page page, WebElement element) {
+    public ActionWindowProducer( Page<?> page, WebElement element) {
         super( page);
         this.element = element;
     }
