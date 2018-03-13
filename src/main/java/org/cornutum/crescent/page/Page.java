@@ -306,14 +306,14 @@ public abstract class Page<S extends Site> {
     }
 
     /**
-     * Returns the element identified by the given locator. Throws ElementMissingException if not found.
+     * Returns the element identified by the given locator. Throws an {@link ElementMissingException} if not found.
      */
     public WebElement findElement( By locator) {
         return finder().findElement( locator);
     }
 
     /**
-     * Returns the visible element identified by the given locator. Throws ElementMissingException if not found.
+     * Returns the visible element identified by the given locator. Throws an {@link ElementMissingException} if not found.
      */
     public WebElement findVisibleElement( By locator) {
         return finder().findVisibleElement( locator);

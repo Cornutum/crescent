@@ -180,7 +180,7 @@ needed to discover and return the `WindowHandle` for the expected new window. To
 [`NewWindowAction`](#page-actions) class to model not only the interaction that produces the new window, but also the type of content now
 available for interaction.
 
-Given a specific `WindowHandle` argument for a new `Page`, the basic `visited()` method will automatically switch the focus of the
+Given a specific `WindowHandle` argument for a new `Page`, the basic `visit()` method will automatically switch the focus of the
 `WebDriver` to the specified window.  Afterwards, your test must be responsible for keeping track of which `Page` instances are modeling
 content for different windows. But, for any `Page` instance, when you call `close()`, it will automatically switch the `WebDriver` focus
 back to the window for the `getParent()` page.

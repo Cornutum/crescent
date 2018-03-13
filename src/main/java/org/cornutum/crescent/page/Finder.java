@@ -57,7 +57,7 @@ public class Finder {
     }
 
     /**
-     * Returns the element identified by the given locator. Throws ElementMissingException if not found.
+     * Returns the element identified by the given locator. Throws an {@link ElementMissingException} if not found.
      */
     public WebElement findElement( final By locator) {
         try {
@@ -69,7 +69,7 @@ public class Finder {
     }
 
     /**
-     * Returns the visible element identified by the given locator. Throws ElementMissingException if not found.
+     * Returns the visible element identified by the given locator. Throws an {@link ElementMissingException} if not found.
      */
     public WebElement findVisibleElement( By locator) {
         return when( PageUtils.isVisible).findElement( locator);
@@ -172,7 +172,7 @@ public class Finder {
     }
 
     /**
-     * Changes the timeout interval (in milliseconds).
+     * Changes the timeout interval.
      */
     public Finder waitingFor( long duration, TimeUnit unit) {
         setTimeout( unit.toMillis( duration));
@@ -195,7 +195,7 @@ public class Finder {
     }
 
     /**
-     * Changes the polling interval (in milliseconds).
+     * Changes the polling interval.
      */
     public Finder checkingEvery( long duration, TimeUnit unit) {
         setInterval( unit.toMillis( duration));
@@ -281,7 +281,8 @@ public class Finder {
     }
 
     /**
-     * Given the current polling and stability intervals, returns the number of polls for stability. 
+     * Given the current {@link #getInterval polling} and {@link #getMinStable stability} intervals, returns the number of polls
+     * needed to confirm stability. 
      */
     public int getMinStableIntervals() {
         return (int) (getRequestWait( getMinStable()) / getRequestWait( getInterval()));
