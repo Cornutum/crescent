@@ -100,7 +100,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.0.0-M1</version>
+                    <version>3.0.0</version>
                     <executions>
                         <execution>
                             <id>attach-javadocs</id>
@@ -109,7 +109,7 @@
                             </goals>
                             <configuration>
                                 <classifier>javadoc</classifier>
-                                <additionalparam>-Xdoclint:none</additionalparam>
+                                <doclint>none</doclint>
                                 <links>
                                     <link>http://seleniumhq.github.io/selenium/docs/api/java/</link>
                                 </links>
