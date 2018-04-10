@@ -125,7 +125,7 @@ be done, depending on your test environment, your preferred tools for configurat
 handle this part of your test setup.
 
 * **When a page is (re)visited, create a new `Page`**. Because this is a good practice for any `WebDriver` program, the `Page` class assumes
-that you will create a new `Page` instance when the corresponding page is available for interaction in the UI. Therefore, every page
+that you will create a new `Page` instance when the corresponding page becomes available for interaction in the UI. Therefore, every page
 model constructor leads to the basic `Page` constructor, which calls `initPage()`. By default, this calls `visit()`, which performs the
 following steps.
 
